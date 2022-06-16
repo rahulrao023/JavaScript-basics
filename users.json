@@ -31,15 +31,16 @@
       "email": "rogerbacon12@yahoo.com"
     },
     {
-      "name": "something",
-      "age": 23,
-      "id": 6
-    },
-    {
       "first_name": "rahul",
       "last_name": "rao",
       "email": "something@something.com",
       "id": 7
+    },
+    {
+      "first_name": "someone",
+      "last_name": "something",
+      "email": "something@something.com",
+      "id": 8
     }
   ]
 }
