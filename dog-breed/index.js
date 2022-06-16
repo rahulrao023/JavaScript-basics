@@ -21,23 +21,20 @@ async function getDogBreeds() {
 
     // console.log(filteredDogBreeds);     // array of all the breeds and sub-breeds matching the regexp condition
 
-    for await (let breed of filteredDogBreeds) {
-        if(count%2 == 0) {
-            if(breed[1].length) {
-                for await (subBreed of breed[1]) {
-                    let images = await axios.get(`https://dog.ceo/api/breed/${breed[0]}/${subBreed}/images`).catch(err => console.log('err'));
-                    dogImages.push(images.data.message);
-                }
-            }
-            else {
-                let images = await axios.get(`https://dog.ceo/api/breed/${breed[0]}/images`).catch(err => console.log('err'));
-                // console.log(images);
+    for (let i=0; i < filteredDogBreeds.length; i++) {
+        if(i%2 != 0) {
+            continue;
+        }
+        if(filteredDogBreeds[i][1].length) {
+            for (let j=0; j<filteredDogBreeds[i][1].length; j++) {
+                let images = await axios.get(`https://dog.ceo/api/breed/${filteredDogBreeds[i][0]}/${filteredDogBreeds[i][1][j]}/images`).catch(err => console.log('err'));
                 dogImages.push(images.data.message);
             }
-            count += 1;
-        } else {
-            count += 1;
-            continue;
+        }
+        else {
+            let images = await axios.get(`https://dog.ceo/api/breed/${filteredDogBreeds[i][0]}/images`).catch(err => console.log('err'));
+            // console.log(images);
+            dogImages.push(images.data.message);
         }
         
     }
