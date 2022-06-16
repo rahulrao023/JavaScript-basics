@@ -30,7 +30,7 @@ let res = promise
 console.log('end1');
 
 
-// async await
+// async await (GET request with axios)
 async function getData() {
     console.log('start2');
 
