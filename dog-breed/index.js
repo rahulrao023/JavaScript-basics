@@ -22,19 +22,20 @@ async function getDogBreeds() {
     // console.log(filteredDogBreeds);     // array of all the breeds and sub-breeds matching the regexp condition
 
     for (let i=0; i < filteredDogBreeds.length; i++) {
-        if(i%2 != 0) {
+        if(i%2 != 1) {
             continue;
         }
         if(filteredDogBreeds[i][1].length) {
             for (let j=0; j<filteredDogBreeds[i][1].length; j++) {
                 let images = await axios.get(`https://dog.ceo/api/breed/${filteredDogBreeds[i][0]}/${filteredDogBreeds[i][1][j]}/images`).catch(err => console.log('err'));
-                dogImages.push(images.data.message);
+
+                for(let image=0; image<images.data.message.length;image++) {
+                    dogImages.push(images.data.message[image]);
+                }
             }
         }
         else {
             let images = await axios.get(`https://dog.ceo/api/breed/${filteredDogBreeds[i][0]}/images`).catch(err => console.log('err'));
-            // console.log(images);
-            dogImages.push(images.data.message);
         }
         
     }
